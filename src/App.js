@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import SortableHeader from "./components/UI/table/SortableHeader";
 import FilterInput from "./components/UI/table/FilterInput";
+import isEmpty from "lodash/isEmpty";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -92,7 +93,7 @@ class App extends Component {
         );
     }
 
-    getSortedData = () => {
+    getSortedData = data => {
         const { sortColumn, sortAsc } = this.state;
         if (!sortColumn) {
             return data;
@@ -104,8 +105,30 @@ class App extends Component {
         });
     };
 
+    getFilteredData = () => {
+        const { filters } = this.state;
+        const filterKeys = Object.keys(filters);
+        if (isEmpty(filterKeys)) {
+            return data;
+        }
+
+        let filteredData = data.slice();
+        filterKeys.forEach(filterKey => {
+            const filterValue = filters[filterKey].toLowerCase();
+            filteredData = filteredData.filter(user => {
+                return user[filterKey].toLowerCase().indexOf(filterValue) > -1;
+            });
+        });
+
+        return filteredData;
+    };
+
+    getRefinedData = () => {
+        return this.getSortedData(this.getFilteredData());
+    };
+
     getRow() {
-        return this.getSortedData().map(({ _id, name, email, phone }) => (
+        return this.getRefinedData().map(({ _id, name, email, phone }) => (
             <tr key={_id}>
                 <td>{name}</td>
                 <td>{email}</td>
