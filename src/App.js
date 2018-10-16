@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import SortableHeader from "./components/UI/table/SortableHeader";
+import FilterInput from "./components/UI/table/FilterInput";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
@@ -59,10 +61,23 @@ class App extends Component {
         return <tr>{ths}</tr>;
     };
 
+    getFilters = () => {
+        const ths = headerColumns.map(searchItem => (
+            <th key={searchItem.column}>
+                <FilterInput />
+            </th>
+        ));
+
+        return <tr>{ths}</tr>;
+    };
+
     getTable() {
         return (
             <Table className="App-table">
-                <thead>{this.getSortableHeaders()}</thead>
+                <thead>
+                    {this.getSortableHeaders()}
+                    {this.getFilters()}
+                </thead>
                 <tbody>{this.getRow()}</tbody>
             </Table>
         );
