@@ -3,6 +3,7 @@ import { Container, Row, Col, Table } from "reactstrap";
 import SortableHeader from "./components/UI/table/SortableHeader";
 import FilterInput from "./components/UI/table/FilterInput";
 import isEmpty from "lodash/isEmpty";
+import { getSortedData, getFilteredData } from "./components/common/utils";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -52,7 +53,7 @@ class App extends Component {
     getSortableHeaders = () => {
         const { sortColumn, sortAsc } = this.state;
 
-        const ths = headerColumns.map(searchItem => {
+        const headers = headerColumns.map(searchItem => {
             const isSorted = sortColumn === searchItem.column;
 
             return (
@@ -68,17 +69,17 @@ class App extends Component {
             );
         });
 
-        return <tr>{ths}</tr>;
+        return <tr>{headers}</tr>;
     };
 
     getFilters = () => {
-        const ths = headerColumns.map(searchItem => (
+        const filters = headerColumns.map(searchItem => (
             <th key={searchItem.column}>
                 <FilterInput filterColumn={searchItem.column} onFilter={this.doFilter} />
             </th>
         ));
 
-        return <tr>{ths}</tr>;
+        return <tr>{filters}</tr>;
     };
 
     getTable() {
@@ -93,38 +94,9 @@ class App extends Component {
         );
     }
 
-    getSortedData = data => {
-        const { sortColumn, sortAsc } = this.state;
-        if (!sortColumn) {
-            return data;
-        }
-
-        return data.slice().sort((userA, userB) => {
-            let sortResult = userA[sortColumn].toLowerCase().localeCompare(userB[sortColumn].toLowerCase());
-            return sortAsc ? sortResult : -sortResult;
-        });
-    };
-
-    getFilteredData = () => {
-        const { filters } = this.state;
-        const filterKeys = Object.keys(filters);
-        if (isEmpty(filterKeys)) {
-            return data;
-        }
-
-        let filteredData = data.slice();
-        filterKeys.forEach(filterKey => {
-            const filterValue = filters[filterKey].toLowerCase();
-            filteredData = filteredData.filter(user => {
-                return user[filterKey].toLowerCase().indexOf(filterValue) > -1;
-            });
-        });
-
-        return filteredData;
-    };
-
     getRefinedData = () => {
-        return this.getSortedData(this.getFilteredData());
+        const { sortColumn, sortAsc, filters } = this.state;
+        return getSortedData(getFilteredData(filters, data), sortColumn, sortAsc);
     };
 
     getRow() {
