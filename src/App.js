@@ -17,8 +17,8 @@ class App extends Component {
         };
     }
 
-    doSort = () => {
-        console.log("doSort");
+    doSort = sortColumn => {
+        console.log("doSort", sortColumn);
     };
 
     getTable() {
