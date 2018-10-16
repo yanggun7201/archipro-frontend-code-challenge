@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortAlphaUp, faSortAlphaDown } from "@fortawesome/free-solid-svg-icons";
 class SortableHeader extends Component {
     handleSort = () => {
         const { sortColumn, onSort } = this.props;
@@ -10,7 +12,7 @@ class SortableHeader extends Component {
         const { children } = this.props;
         return (
             <th className="sort-icon" onClick={this.handleSort}>
-                {children}
+                {children} <FontAwesomeIcon icon={faSortAlphaUp} />
             </th>
         );
     }
