@@ -9,18 +9,23 @@ class SortableHeader extends Component {
     };
 
     render() {
-        const { children } = this.props;
+        const { children, sortAsc } = this.props;
         return (
             <th className="sort-icon" onClick={this.handleSort}>
-                {children} <FontAwesomeIcon icon={faSortAlphaUp} />
+                {children} <FontAwesomeIcon icon={sortAsc ? faSortAlphaUp : faSortAlphaDown} />
             </th>
         );
     }
 }
 
+SortableHeader.defaultProps = {
+    sortAsc: false
+};
+
 SortableHeader.propTypes = {
     onSort: PropTypes.func.isRequired,
-    sortColumn: PropTypes.string.isRequired
+    sortColumn: PropTypes.string.isRequired,
+    sortAsc: PropTypes.bool
 };
 
 export default SortableHeader;

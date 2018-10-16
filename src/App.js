@@ -22,17 +22,31 @@ class App extends Component {
     };
 
     getTable() {
+        const { sortColumn, sortAsc } = this.state;
+
         return (
             <Table className="App-table">
                 <thead>
                     <tr>
-                        <SortableHeader onSort={this.doSort} sortColumn="name">
+                        <SortableHeader
+                            onSort={this.doSort}
+                            sortAsc={sortColumn === "name" ? sortAsc : false}
+                            sortColumn="name"
+                        >
                             Name
                         </SortableHeader>
-                        <SortableHeader onSort={this.doSort} sortColumn="email">
+                        <SortableHeader
+                            onSort={this.doSort}
+                            sortAsc={sortColumn === "email" ? sortAsc : false}
+                            sortColumn="email"
+                        >
                             Email
                         </SortableHeader>
-                        <SortableHeader onSort={this.doSort} sortColumn="phone">
+                        <SortableHeader
+                            onSort={this.doSort}
+                            sortAsc={sortColumn === "phone" ? sortAsc : false}
+                            sortColumn="phone"
+                        >
                             Contact Number
                         </SortableHeader>
                     </tr>
