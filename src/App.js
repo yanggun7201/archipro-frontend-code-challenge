@@ -33,6 +33,7 @@ class App extends Component {
                         <SortableHeader
                             onSort={this.doSort}
                             sortAsc={sortColumn === "name" ? sortAsc : true}
+                            isSorted={sortColumn === "name"}
                             sortColumn="name"
                         >
                             Name
@@ -40,6 +41,7 @@ class App extends Component {
                         <SortableHeader
                             onSort={this.doSort}
                             sortAsc={sortColumn === "email" ? sortAsc : true}
+                            isSorted={sortColumn === "email"}
                             sortColumn="email"
                         >
                             Email
@@ -47,6 +49,7 @@ class App extends Component {
                         <SortableHeader
                             onSort={this.doSort}
                             sortAsc={sortColumn === "phone" ? sortAsc : true}
+                            isSorted={sortColumn === "phone"}
                             sortColumn="phone"
                         >
                             Contact Number

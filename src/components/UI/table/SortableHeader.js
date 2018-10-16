@@ -8,10 +8,19 @@ class SortableHeader extends Component {
         onSort(sortColumn, sortAsc);
     };
 
+    getClassName = () => {
+        const { sortAsc, isSorted } = this.props;
+        if (!isSorted) {
+            return "";
+        }
+
+        return sortAsc ? "sort-column-up" : "sort-column-down";
+    };
+
     render() {
         const { children, sortAsc } = this.props;
         return (
-            <th className="sort-icon" onClick={this.handleSort}>
+            <th className={"sort-icon " + this.getClassName()} onClick={this.handleSort}>
                 {children}
                 &nbsp;
                 <FontAwesomeIcon icon={sortAsc ? faSortAlphaUp : faSortAlphaDown} />
@@ -21,13 +30,15 @@ class SortableHeader extends Component {
 }
 
 SortableHeader.defaultProps = {
-    sortAsc: false
+    sortAsc: false,
+    isSorted: false
 };
 
 SortableHeader.propTypes = {
     onSort: PropTypes.func.isRequired,
     sortColumn: PropTypes.string.isRequired,
-    sortAsc: PropTypes.bool
+    sortAsc: PropTypes.bool,
+    isSorted: PropTypes.bool
 };
 
 export default SortableHeader;
