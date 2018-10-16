@@ -7,6 +7,20 @@ import "./App.css";
 import data from "./api/data.json";
 import logo from "./archipro_dev.webp";
 
+const headerColumns = [
+    {
+        column: "name",
+        text: "Name"
+    },
+    {
+        column: "email",
+        text: "Email"
+    },
+    {
+        column: "phone",
+        text: "Contact Number"
+    }
+];
 class App extends Component {
     constructor() {
         super();
@@ -23,39 +37,32 @@ class App extends Component {
         });
     };
 
-    getTable() {
+    getSortableHeaders = () => {
         const { sortColumn, sortAsc } = this.state;
 
+        const ths = headerColumns.map(searchItem => {
+            const isSorted = sortColumn === searchItem.column;
+
+            return (
+                <SortableHeader
+                    key={searchItem.column}
+                    onSort={this.doSort}
+                    sortAsc={isSorted ? sortAsc : false}
+                    sortColumn={searchItem.column}
+                    isSorted={isSorted}
+                >
+                    {searchItem.text}
+                </SortableHeader>
+            );
+        });
+
+        return <tr>{ths}</tr>;
+    };
+
+    getTable() {
         return (
             <Table className="App-table">
-                <thead>
-                    <tr>
-                        <SortableHeader
-                            onSort={this.doSort}
-                            sortAsc={sortColumn === "name" ? sortAsc : true}
-                            isSorted={sortColumn === "name"}
-                            sortColumn="name"
-                        >
-                            Name
-                        </SortableHeader>
-                        <SortableHeader
-                            onSort={this.doSort}
-                            sortAsc={sortColumn === "email" ? sortAsc : true}
-                            isSorted={sortColumn === "email"}
-                            sortColumn="email"
-                        >
-                            Email
-                        </SortableHeader>
-                        <SortableHeader
-                            onSort={this.doSort}
-                            sortAsc={sortColumn === "phone" ? sortAsc : true}
-                            isSorted={sortColumn === "phone"}
-                            sortColumn="phone"
-                        >
-                            Contact Number
-                        </SortableHeader>
-                    </tr>
-                </thead>
+                <thead>{this.getSortableHeaders()}</thead>
                 <tbody>{this.getRow()}</tbody>
             </Table>
         );
