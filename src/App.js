@@ -40,8 +40,8 @@ class App extends Component {
         });
     };
 
-    doFilter = () => {
-        console.log("doFilter");
+    doFilter = filterColumn => {
+        console.log("doFilter", filterColumn);
     };
 
     getSortableHeaders = () => {
