@@ -12,7 +12,7 @@ class App extends Component {
         super();
         this.state = {
             sortAsc: true,
-            sortColumn: null
+            sortColumn: "name"
         };
     }
 
@@ -32,21 +32,21 @@ class App extends Component {
                     <tr>
                         <SortableHeader
                             onSort={this.doSort}
-                            sortAsc={sortColumn === "name" ? sortAsc : false}
+                            sortAsc={sortColumn === "name" ? sortAsc : true}
                             sortColumn="name"
                         >
                             Name
                         </SortableHeader>
                         <SortableHeader
                             onSort={this.doSort}
-                            sortAsc={sortColumn === "email" ? sortAsc : false}
+                            sortAsc={sortColumn === "email" ? sortAsc : true}
                             sortColumn="email"
                         >
                             Email
                         </SortableHeader>
                         <SortableHeader
                             onSort={this.doSort}
-                            sortAsc={sortColumn === "phone" ? sortAsc : false}
+                            sortAsc={sortColumn === "phone" ? sortAsc : true}
                             sortColumn="phone"
                         >
                             Contact Number
