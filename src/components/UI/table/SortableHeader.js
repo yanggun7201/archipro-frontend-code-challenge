@@ -12,7 +12,9 @@ class SortableHeader extends Component {
         const { children, sortAsc } = this.props;
         return (
             <th className="sort-icon" onClick={this.handleSort}>
-                {children} <FontAwesomeIcon icon={sortAsc ? faSortAlphaUp : faSortAlphaDown} />
+                {children}
+                &nbsp;
+                <FontAwesomeIcon icon={sortAsc ? faSortAlphaUp : faSortAlphaDown} />
             </th>
         );
     }

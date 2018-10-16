@@ -11,14 +11,12 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            data,
             sortAsc: true,
-            sortColumn: ""
+            sortColumn: null
         };
     }
 
     doSort = (sortColumn, sortAsc) => {
-        console.log("doSort", sortColumn, sortAsc);
         this.setState({
             sortColumn,
             sortAsc: !!!sortAsc
@@ -60,8 +58,20 @@ class App extends Component {
         );
     }
 
+    getSortedData = () => {
+        const { sortColumn, sortAsc } = this.state;
+        if (!sortColumn) {
+            return data;
+        }
+
+        return data.slice().sort((userA, userB) => {
+            let sortResult = userA[sortColumn].toLowerCase().localeCompare(userB[sortColumn].toLowerCase());
+            return sortAsc ? sortResult : -sortResult;
+        });
+    };
+
     getRow() {
-        return data.map(({ _id, name, email, phone }) => (
+        return this.getSortedData().map(({ _id, name, email, phone }) => (
             <tr key={_id}>
                 <td>{name}</td>
                 <td>{email}</td>
