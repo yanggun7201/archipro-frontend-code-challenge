@@ -17,8 +17,12 @@ class App extends Component {
         };
     }
 
-    doSort = sortColumn => {
-        console.log("doSort", sortColumn);
+    doSort = (sortColumn, sortAsc) => {
+        console.log("doSort", sortColumn, sortAsc);
+        this.setState({
+            sortColumn,
+            sortAsc: !!!sortAsc
+        });
     };
 
     getTable() {

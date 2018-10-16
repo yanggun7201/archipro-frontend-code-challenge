@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAlphaUp, faSortAlphaDown } from "@fortawesome/free-solid-svg-icons";
 class SortableHeader extends Component {
     handleSort = () => {
-        const { sortColumn, onSort } = this.props;
-        onSort(sortColumn);
+        const { sortColumn, sortAsc, onSort } = this.props;
+        onSort(sortColumn, sortAsc);
     };
 
     render() {
