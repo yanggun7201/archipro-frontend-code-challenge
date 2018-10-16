@@ -8,7 +8,11 @@ class SortableHeader extends Component {
 
     render() {
         const { children } = this.props;
-        return <th onClick={this.handleSort}>{children}</th>;
+        return (
+            <th className="sort-icon" onClick={this.handleSort}>
+                {children}
+            </th>
+        );
     }
 }
 
