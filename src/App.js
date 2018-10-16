@@ -44,6 +44,10 @@ class App extends Component {
         console.log("doFilter", filterColumn);
     };
 
+    doFilter = (filterColumn, value) => {
+        console.log("doFilter", filterColumn, value);
+    };
+
     getSortableHeaders = () => {
         const { sortColumn, sortAsc } = this.state;
 

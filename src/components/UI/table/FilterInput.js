@@ -12,7 +12,11 @@ class FilterInput extends Component {
 
     handleFilter = e => {
         const { filterColumn, onFilter } = this.props;
-        onFilter(filterColumn);
+        const value = e.target.value;
+        this.setState({
+            value
+        });
+        onFilter(filterColumn, value);
     };
 
     render() {
