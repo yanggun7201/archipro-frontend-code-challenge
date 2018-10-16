@@ -28,7 +28,8 @@ class App extends Component {
         super();
         this.state = {
             sortAsc: true,
-            sortColumn: "name"
+            sortColumn: "name",
+            filters: {}
         };
     }
 
@@ -37,6 +38,10 @@ class App extends Component {
             sortColumn,
             sortAsc: !!!sortAsc
         });
+    };
+
+    doFilter = () => {
+        console.log("doFilter");
     };
 
     getSortableHeaders = () => {
@@ -64,7 +69,7 @@ class App extends Component {
     getFilters = () => {
         const ths = headerColumns.map(searchItem => (
             <th key={searchItem.column}>
-                <FilterInput />
+                <FilterInput filterColumn={searchItem.column} onFilter={this.doFilter} />
             </th>
         ));
 
