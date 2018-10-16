@@ -40,12 +40,12 @@ class App extends Component {
         });
     };
 
-    doFilter = filterColumn => {
-        console.log("doFilter", filterColumn);
-    };
-
     doFilter = (filterColumn, value) => {
-        console.log("doFilter", filterColumn, value);
+        const { filters } = this.state;
+        filters[filterColumn] = value;
+        this.setState({
+            filters
+        });
     };
 
     getSortableHeaders = () => {
