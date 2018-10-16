@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
+import SortableHeader from "./components/UI/table/SortableHeader";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
@@ -8,6 +9,7 @@ import logo from "./archipro_dev.webp";
 
 class App extends Component {
     constructor() {
+        super();
         this.state = {
             data
         };
@@ -18,9 +20,9 @@ class App extends Component {
             <Table className="App-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
+                        <SortableHeader>Name</SortableHeader>
+                        <SortableHeader>Email</SortableHeader>
+                        <SortableHeader>Contact Number</SortableHeader>
                     </tr>
                 </thead>
                 <tbody>{this.getRow()}</tbody>
