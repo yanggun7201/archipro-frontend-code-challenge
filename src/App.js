@@ -17,14 +17,24 @@ class App extends Component {
         };
     }
 
+    doSort = () => {
+        console.log("doSort");
+    };
+
     getTable() {
         return (
             <Table className="App-table">
                 <thead>
                     <tr>
-                        <SortableHeader>Name</SortableHeader>
-                        <SortableHeader>Email</SortableHeader>
-                        <SortableHeader>Contact Number</SortableHeader>
+                        <SortableHeader onSort={this.doSort} sortColumn="name">
+                            Name
+                        </SortableHeader>
+                        <SortableHeader onSort={this.doSort} sortColumn="email">
+                            Email
+                        </SortableHeader>
+                        <SortableHeader onSort={this.doSort} sortColumn="phone">
+                            Contact Number
+                        </SortableHeader>
                     </tr>
                 </thead>
                 <tbody>{this.getRow()}</tbody>
