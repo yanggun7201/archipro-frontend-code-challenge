@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import SortableHeader from "./components/UI/table/SortableHeader";
 import FilterInput from "./components/UI/table/FilterInput";
-import isEmpty from "lodash/isEmpty";
 import { getSortedData, getFilteredData } from "./components/common/utils";
 
 import "bootstrap/dist/css/bootstrap.min.css";

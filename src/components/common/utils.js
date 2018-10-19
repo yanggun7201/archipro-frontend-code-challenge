@@ -1,7 +1,13 @@
 import isEmpty from "lodash/isEmpty";
 
+const isInvalid = (data, sortColumn, sortAsc) => {
+    if (!sortColumn || isEmpty(data) || typeof sortAsc !== "boolean") {
+        return data;
+    }
+};
+
 export const getSortedData = (data, sortColumn, sortAsc) => {
-    if (!sortColumn || isEmpty(data)) {
+    if (isInvalid(data, sortColumn, sortAsc)) {
         return data;
     }
 
